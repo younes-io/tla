@@ -1,6 +1,6 @@
 [package]
 name = "tla-cli"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "TLA+ CLI for linting, formatting, and TLC checks"
 license = "MIT"
@@ -9,6 +9,7 @@ repository = "https://github.com/younes-io/tla"
 keywords = ["tla", "tla+", "cli", "lint", "tlc"]
 categories = ["command-line-utilities"]
 exclude = ["target/", "tools/", "**/*.jar", "**/*.snap.new", "**/*.snap.old", ".idea/", ".DS_Store"]
+rust-version = "1.85"
 
 [dependencies]
 anyhow = "1"
@@ -19,6 +20,7 @@ tree-sitter = "0.22"
 tree-sitter-tlaplus = "1.5.0"
 walkdir = "2"
 which = "5"
+home = "=0.5.11"
 
 [dev-dependencies]
 insta = { version = "1", features = ["json"] }
