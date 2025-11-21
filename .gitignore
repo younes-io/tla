@@ -3,3 +3,5 @@
 **/*.snap.old
 .idea/
 .DS_Store
+tools/
+*.jar

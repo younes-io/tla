@@ -38,4 +38,15 @@ pub enum Command {
         #[arg(long)]
         cfg: Option<PathBuf>,
     },
+
+    /// Check required external tools and provide install guidance
+    Doctor {
+        /// Write a tlc wrapper script to this path (optional)
+        #[arg(long, value_name = "PATH")]
+        write_tlc_wrapper: Option<PathBuf>,
+
+        /// Path to tla2tools.jar (required when writing wrapper unless TLA_TOOLS_JAR is set)
+        #[arg(long, value_name = "JAR")]
+        jar: Option<PathBuf>,
+    },
 }

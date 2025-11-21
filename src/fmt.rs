@@ -1,3 +1,4 @@
+use crate::tooling::ensure_tool;
 use anyhow::{Context, Result, anyhow};
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -5,6 +6,8 @@ use std::process::Command;
 use walkdir::WalkDir;
 
 pub fn run(paths: Vec<PathBuf>) -> Result<()> {
+    ensure_tool("tlafmt")?;
+
     let files = collect_tla_files(paths);
     let mut failed = false;
 
