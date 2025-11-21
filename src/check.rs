@@ -3,7 +3,7 @@ use anyhow::{Context, Result, anyhow};
 use std::io::Write;
 use std::path::PathBuf;
 use std::process::Command;
-use tempfile::NamedTempFile;
+use tempfile::{Builder, NamedTempFile};
 
 pub fn run(spec: String, cfg: Option<PathBuf>) -> Result<()> {
     ensure_tool("tlc")?;
@@ -19,7 +19,9 @@ pub fn run(spec: String, cfg: Option<PathBuf>) -> Result<()> {
     if let Some(cfg_path) = cfg {
         cmd.arg("-config").arg(cfg_path);
     } else {
-        let mut tmp = NamedTempFile::new()?;
+        // TLC appends \".cfg\" when a path lacks that suffix, so create a temp
+        // file that already ends with .cfg to avoid \"file not found\".
+        let mut tmp: NamedTempFile = Builder::new().suffix(".cfg").tempfile()?;
         writeln!(tmp, "INIT Init")?;
         writeln!(tmp, "NEXT Next")?;
         _temp_cfg = tmp; // keep alive
