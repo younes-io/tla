@@ -5,10 +5,9 @@ Command-line tool providing linting, formatting, and TLC invocation for TLA+ pro
 
 How to get the binary
 ---------------------
-- From source (current flow):
-  - Build once and run: `cargo build --release` then use `./target/release/tla ...`
-  - Or install into your cargo bin dir: `cargo install --path .` then run `tla ...`
-- When published to crates.io: `cargo install tla` (not yet published).
+- Install into your cargo bin dir (recommended): `cargo install --path .` then run `tla ...`
+- Or build once and run from the release target: `cargo build --release` then `./target/release/tla ...`
+- Future: `cargo install tla` (once published).
 
 Prerequisites (Linux)
 ---------------------
@@ -48,19 +47,19 @@ Usage
 -----
 ```
 # Lint TLA+ files (default .)
-cargo run -- lint [PATH...]
+tla lint [PATH...]
 
 # JSON diagnostics
-cargo run -- lint path --json
+tla lint path --json
 
 # Format using tlafmt
-cargo run -- fmt [PATH...]
+tla fmt [PATH...]
 
 # Model check with TLC
-cargo run -- check --spec MySpec [--cfg MySpec.cfg]
+tla check --spec MySpec [--cfg MySpec.cfg]
 
 # Environment check (tlafmt/tlc presence, optional wrapper creation)
-cargo run -- doctor [--write-tlc-wrapper <PATH>] [--jar <tla2tools.jar>]
+tla doctor [--write-tlc-wrapper <PATH>] [--jar <tla2tools.jar>]
 ```
 
 Exit codes: success 0; lint errors or formatter/check failures 1; unexpected internal errors non-zero.
@@ -73,9 +72,9 @@ cargo clippy -- -D warnings
 cargo test
 
 # Smoke (examples)
-cargo run -- lint fixtures/ok.tla
-cargo run -- lint fixtures/unused.tla --json
-cargo run -- check --spec Minimal   # requires tlc on PATH
+tla lint fixtures/ok.tla
+tla lint fixtures/unused.tla --json
+tla check --spec Minimal   # requires tlc on PATH
 ```
 
 Notes
