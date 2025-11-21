@@ -1,6 +1,6 @@
 use std::path::PathBuf;
-use tla::lint::types::{RuleCode, Severity};
-use tla::lint::{collect_diagnostics, reporter};
+use tla_cli::lint::types::{RuleCode, Severity};
+use tla_cli::lint::{collect_diagnostics, reporter};
 
 fn fixture(name: &str) -> PathBuf {
     PathBuf::from("fixtures").join(name)
@@ -41,7 +41,7 @@ fn json_output_is_stable() {
 
 #[test]
 fn ok_fixture_tree_shape() {
-    use tla::tla_parser::TlaParser;
+    use tla_cli::tla_parser::TlaParser;
     let mut parser = TlaParser::new().unwrap();
     let src = std::fs::read_to_string(fixture("ok.tla")).unwrap();
     let tree = parser.parse(&src).expect("parse ok");
