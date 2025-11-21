@@ -1,0 +1,22 @@
+---
+source: tests/lint.rs
+expression: json
+---
+[
+  {
+    "file": "fixtures/missing_next.tla",
+    "line": 1,
+    "column": 1,
+    "severity": "error",
+    "code": "TLA002",
+    "message": "Module declares VARIABLES but is missing Next operator"
+  },
+  {
+    "file": "fixtures/unused.tla",
+    "line": 2,
+    "column": 14,
+    "severity": "warning",
+    "code": "TLA001",
+    "message": "Variable `y` is declared but never used"
+  }
+]
