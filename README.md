@@ -7,7 +7,7 @@ How to get the binary
 ---------------------
 - Install into your cargo bin dir (recommended): `cargo install --path .` then run `tla ...`
 - Or build once and run from the release target: `cargo build --release` then `./target/release/tla ...`
-- Future: `cargo install tla` (once published).
+- Future (crates.io): `cargo install tla-cli` — it will still install the binary as `tla` (package name differs from bin name).
 
 Prerequisites (Linux)
 ---------------------
