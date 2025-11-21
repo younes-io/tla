@@ -28,6 +28,8 @@ export PATH="$PWD/tools:$PATH"
 
 # verify
 cargo run -- doctor
+
+# Reminder: keep the tools directory on PATH in future shells (e.g., add the export line to ~/.zshrc).
 ```
 
 You can also set `TLA_TOOLS_JAR=/path/to/tla2tools.jar` and run:
