@@ -3,6 +3,13 @@ TLA CLI
 
 Command-line tool providing linting, formatting, and TLC invocation for TLA+ projects.
 
+How to get the binary
+---------------------
+- From source (current flow):
+  - Build once and run: `cargo build --release` then use `./target/release/tla ...`
+  - Or install into your cargo bin dir: `cargo install --path .` then run `tla ...`
+- When published to crates.io: `cargo install tla` (not yet published).
+
 Prerequisites (Linux)
 ---------------------
 - Rust (MSRV 1.79+)
