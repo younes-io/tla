@@ -40,29 +40,42 @@ fn json_output_is_stable() {
 }
 
 #[test]
-#[ignore]
-fn debug_identifiers_in_ok() {
+fn ok_fixture_tree_shape() {
     use tla::tla_parser::TlaParser;
     let mut parser = TlaParser::new().unwrap();
     let src = std::fs::read_to_string(fixture("ok.tla")).unwrap();
-    let tree = parser.parse(&src).unwrap();
+    let tree = parser.parse(&src).expect("parse ok");
     let root = tree.root_node();
-    eprintln!("{}", root.to_sexp());
+    assert!(!root.has_error());
 
-    fn walk(node: tree_sitter::Node, src: &str) {
-        if node.kind() == "identifier" {
-            let txt = node.utf8_text(src.as_bytes()).unwrap();
+    let mut pairs = Vec::new();
+    fn walk(node: tree_sitter::Node, src: &str, out: &mut Vec<(String, String)>) {
+        if node.kind() == "identifier" || node.kind() == "identifier_ref" {
+            let txt = node.utf8_text(src.as_bytes()).unwrap().to_string();
             let parent = node
                 .parent()
                 .map(|p| p.kind().to_string())
                 .unwrap_or_default();
-            eprintln!("identifier `{}` parent {}", txt, parent);
+            out.push((txt, parent));
         }
         let mut cursor = node.walk();
         for child in node.children(&mut cursor) {
-            walk(child, src);
+            walk(child, src, out);
         }
     }
 
-    walk(root, &src);
+    walk(root, &src, &mut pairs);
+
+    assert_eq!(
+        pairs,
+        vec![
+            ("Ok".into(), "module".into()),
+            ("x".into(), "variable_declaration".into()),
+            ("Init".into(), "operator_definition".into()),
+            ("x".into(), "bound_infix_op".into()), // occurrence in Init definition
+            ("Next".into(), "operator_definition".into()),
+            ("x".into(), "bound_postfix_op".into()), // x' occurrence
+            ("x".into(), "bound_infix_op".into()),   // rhs occurrence
+        ]
+    );
 }
