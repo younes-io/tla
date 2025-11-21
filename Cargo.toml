@@ -2,6 +2,13 @@
 name = "tla-cli"
 version = "0.1.0"
 edition = "2024"
+description = "TLA+ CLI for linting, formatting, and TLC checks"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/younes-io/tla"
+keywords = ["tla", "tla+", "cli", "lint", "tlc"]
+categories = ["command-line-utilities", "development-tools::build-tools"]
+exclude = ["target/", "tools/", "**/*.jar", "**/*.snap.new", "**/*.snap.old", ".idea/", ".DS_Store"]
 
 [dependencies]
 anyhow = "1"
